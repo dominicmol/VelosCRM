@@ -1,8 +1,0 @@
-todo.txt
-ganarcrm_vue/node_modules
-ganarcrm_vue/dist
-ganarcrm_django/db.sqlite3
-ganarcrm_django/*.pyc
-ganarcrm_django/*/*.pyc
-ganarcrm_django/*/*/*.pyc
-ganarcrm_django/*/*/*/*.pyc

@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["about"],{"92db":function(t,a,c){"use strict";c("ac6b")},ac6b:function(t,a,c){},f820:function(t,a,c){"use strict";c.r(a);var e=c("7a23"),b=Object(e["G"])("data-v-4ad24542");Object(e["t"])("data-v-4ad24542");var n={class:"about velos-about"},o=Object(e["h"])("h1",null,"About Velos CRM",-1);Object(e["r"])();var d=b((function(t,a){return Object(e["q"])(),Object(e["d"])("div",n,[o])}));c("92db");const u={};u.render=d,u.__scopeId="data-v-4ad24542";a["default"]=u}}]);
+//# sourceMappingURL=about.39107b06.js.map
