@@ -1,42 +1,41 @@
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-wn_v7z89$xlu+@uyo@um7_0mzlbcc_m$i$6x5+(#tx)3j%%auy'
 
-# Stripe
-STRIPE_PUB_KEY = 'pk_test_51IskUtBa5bOHd7L5NTRJPnQa7bKWKhKzTQwGqDQ1IU2PnCK78kHqAoHQcP4iFjpTL2SoSk5miaLTL4LjYf1nE72k00UvoOvrnA'
-STRIPE_SECRET_KEY = 'sk_test_51IskUtBa5bOHd7L5JLISWCnXcFxecSIZdUQfcXBbJAj3NpqfRrR4gDrBulRMjiGF64oPk7RGCboqKI71q7ATN5n800THD65kE0'
-STRIPE_PRICE_ID_SMALL_TEAM = 'price_1IuXkUBa5bOHd7L5VxwI8XnS'
-STRIPE_PRICE_ID_BIG_TEAM = 'price_1IuXlABa5bOHd7L5D7zel5a6'
-STRIPE_WEBHOOK_KEY = 'whsec_iV0qP1UMZEvR53tkDW7rGBE6EgFZ6sxj'
-
-FRONTEND_WEBSITE_SUCCESS_URL = 'http://localhost:8081/dashboard/team/plans/thankyou'
-FRONTEND_WEBSITE_CANCEL_URL = 'http://localhost:8081/dashboard/team/plans'
-
 DEBUG = True
+
 ALLOWED_HOSTS = []
 
-# ✅ CORS fix: voeg alle nodige origins toe
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'http://localhost:8081',
-    'http://localhost:8082',  
+    'http://localhost:8082',
 ]
 
-# REST Framework
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
-}
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
-# Apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,20 +43,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders',
     'djoser',
+    'django_filters', 
     'client.apps.ClientConfig',
     'lead.apps.LeadConfig',
     'team.apps.TeamConfig',
+    'django_extensions',
 ]
 
-# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # <== moet voor CommonMiddleware
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -85,7 +85,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'veloscrm_django.wsgi.application'
 
-# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -93,7 +92,6 @@ DATABASES = {
     }
 }
 
-# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -101,15 +99,29 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Language & time
 LANGUAGE_CODE = 'en-us'
+
 TIME_ZONE = 'UTC'
+
 USE_I18N = True
+
 USE_L10N = True
+
 USE_TZ = True
 
-# Static files
+# URL waar Django je statics serveert
 STATIC_URL = '/static/'
 
-# Default primary key field
+# Map waar collectstatic al je bestanden naartoe schrijft
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
