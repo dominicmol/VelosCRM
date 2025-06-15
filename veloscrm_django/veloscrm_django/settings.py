@@ -1,3 +1,4 @@
+# veloscrm_django/settings.py
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -7,38 +8,23 @@ SECRET_KEY = 'django-insecure-wn_v7z89$xlu+@uyo@um7_0mzlbcc_m$i$6x5+(#tx)3j%%auy
 # Zet DEBUG uit voor productie
 DEBUG = False
 
-# Sta alleen jouw PythonAnywhere-domein toe
+# Sta alleen jouw PA-domein toe
 ALLOWED_HOSTS = [
     'dominicmol.pythonanywhere.com',
 ]
 
-# CORS-instellingen (voor jouw lokale front-end development)
+# (optioneel) voor veilige CSRF-cookies als je inlog-forms gebruikt
+CSRF_TRUSTED_ORIGINS = [
+    'https://dominicmol.pythonanywhere.com',
+]
+
+# CORS alleen nodig voor lokale dev van je frontend
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'http://localhost:8081',
     'http://localhost:8082',
 ]
-CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -74,7 +60,8 @@ ROOT_URLCONF = 'veloscrm_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # hier moet je staticfiles map toevoegen als template-dir, zodat index.html gevonden wordt
+        'DIRS': [ BASE_DIR / 'staticfiles' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -109,7 +96,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# URL en map voor statische bestanden
+# statische bestanden
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -123,3 +110,4 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     )
 }
+
