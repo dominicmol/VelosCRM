@@ -9,6 +9,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 CORS_ALLOWED_ORIGINS = [
+    'dominicmol.pythonanywhere.com',
     'http://localhost:8080',
     'http://localhost:8081',
     'http://localhost:8082',
