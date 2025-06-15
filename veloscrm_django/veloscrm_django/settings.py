@@ -4,17 +4,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-wn_v7z89$xlu+@uyo@um7_0mzlbcc_m$i$6x5+(#tx)3j%%auy'
 
-DEBUG = True
+# Zet DEBUG uit voor productie
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
-CORS_ALLOWED_ORIGINS = [
+# Sta alleen jouw PythonAnywhere-domein toe
+ALLOWED_HOSTS = [
     'dominicmol.pythonanywhere.com',
+]
+
+# CORS-instellingen (voor jouw lokale front-end development)
+CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'http://localhost:8081',
     'http://localhost:8082',
 ]
-
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
@@ -48,7 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'django_filters', 
+    'django_filters',
     'client.apps.ClientConfig',
     'lead.apps.LeadConfig',
     'team.apps.TeamConfig',
@@ -101,19 +104,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
-# URL waar Django je statics serveert
+# URL en map voor statische bestanden
 STATIC_URL = '/static/'
-
-# Map waar collectstatic al je bestanden naartoe schrijft
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
