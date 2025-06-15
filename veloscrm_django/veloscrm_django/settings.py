@@ -1,11 +1,12 @@
 # veloscrm_django/settings.py
+
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-wn_v7z89$xlu+@uyo@um7_0mzlbcc_m$i$6x5+(#tx)3j%%auy'
 
-# Zet DEBUG uit voor productie
+# Zet DEBUG uit in productie
 DEBUG = False
 
 # Sta alleen jouw PA-domein toe
@@ -13,12 +14,12 @@ ALLOWED_HOSTS = [
     'dominicmol.pythonanywhere.com',
 ]
 
-# (optioneel) voor veilige CSRF-cookies als je inlog-forms gebruikt
+# Voor veilige CSRF-cookies bij production forms
 CSRF_TRUSTED_ORIGINS = [
     'https://dominicmol.pythonanywhere.com',
 ]
 
-# CORS alleen nodig voor lokale dev van je frontend
+# CORS alleen nodig voor je lokale frontend-dev
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'http://localhost:8081',
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'veloscrm_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # hier moet je staticfiles map toevoegen als template-dir, zodat index.html gevonden wordt
+        # Voeg hier je Vue-build toe zodat index.html gevonden wordt
         'DIRS': [ BASE_DIR / 'staticfiles' ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -96,8 +97,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# statische bestanden
-STATIC_URL = '/static/'
+# Statics
+STATIC_URL  = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -110,4 +111,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     )
 }
-
