@@ -6,15 +6,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-wn_v7z89$xlu+@uyo@um7_0mzlbcc_m$i$6x5+(#tx)3j%%auy'
 
-# Zet DEBUG uit voor productie
-DEBUG = False
+# Tijdens de ontwikkelfase altijd aanzetten
+DEBUG = True
 
-# Sta alleen jouw PA-domein toe
-ALLOWED_HOSTS = [
-    'dominicmol.pythonanywhere.com',
-]
+# Sta alle hosts toe (eenvoudig voor dev en demo)
+ALLOWED_HOSTS = ['*']
 
-# Als je formulier-based CSRF gebruikt:
+# Voor het geval je form-based CSRF gebruikt (prod-only)
 CSRF_TRUSTED_ORIGINS = [
     'https://dominicmol.pythonanywhere.com',
 ]
@@ -34,11 +32,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
     'django_filters',
+
     'client.apps.ClientConfig',
     'lead.apps.LeadConfig',
     'team.apps.TeamConfig',
@@ -48,7 +48,10 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    # CORS-middleware
     'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -61,7 +64,7 @@ ROOT_URLCONF = 'veloscrm_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # Zorg dat hier de map met je Vue-build staat:
+        # Hier staat je Vue-build (collectstatic output)
         'DIRS': [BASE_DIR / 'staticfiles'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -97,7 +100,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Statics
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
