@@ -6,39 +6,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-wn_v7z89$xlu+@uyo@um7_0mzlbcc_m$i$6x5+(#tx)3j%%auy'
 
-# Zet DEBUG aan voor development
-DEBUG = True
+# Zet DEBUG uit voor productie
+DEBUG = False
 
-# Tijdens development kan ALLOWED_HOSTS leeg blijven
-ALLOWED_HOSTS = []
+# Sta alleen jouw PA-domein toe
+ALLOWED_HOSTS = [
+    'dominicmol.pythonanywhere.com',
+]
 
-# CORS alleen nodig als je lokaal de frontend op een andere poort draait
+# Als je formulier-based CSRF gebruikt:
+CSRF_TRUSTED_ORIGINS = [
+    'https://dominicmol.pythonanywhere.com',
+]
+
+# CORS alleen nodig voor je lokale frontend-dev
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'http://localhost:8081',
     'http://localhost:8082',
 ]
-CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -47,13 +34,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
     'django_filters',
-
     'client.apps.ClientConfig',
     'lead.apps.LeadConfig',
     'team.apps.TeamConfig',
@@ -76,7 +61,8 @@ ROOT_URLCONF = 'veloscrm_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # álle views/template-mappen van je apps worden automatisch meegenomen
+        # Zorg dat hier de map met je Vue-build staat:
+        'DIRS': [BASE_DIR / 'staticfiles'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,8 +97,9 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Statische bestanden tijdens development
+# Statics
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
