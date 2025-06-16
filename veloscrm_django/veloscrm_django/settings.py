@@ -22,6 +22,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'http://localhost:8081',
     'http://localhost:8082',
+    'https://sweet-pegasus-376b81.netlify.app',
 ]
 CORS_ALLOW_CREDENTIALS = True
 
