@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from django.views.generic import TemplateView      # ← HIER
 
 from client.views import NoteViewSet
 
@@ -16,6 +17,7 @@ urlpatterns = [
     path('api/v1/auth/', include('djoser.urls')),
     path('api/v1/auth/', include('djoser.urls.authtoken')),
 
+    # Serve je Vue-app
     path('', TemplateView.as_view(template_name='index.html'), name='spa'),
 ]
 
